@@ -21,5 +21,5 @@ app.use("/api/user", userRouter)
 
 
 app.listen(80, () => {
-    console.log("O servidor está rodando na porta", process.env.PORT)
+    console.log("O servidor está rodando na porta", 80)
 })
