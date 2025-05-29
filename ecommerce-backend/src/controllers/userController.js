@@ -53,8 +53,9 @@ const controller = {
                 const {__v, _id, ...json} = user.toObject()
                 const token = await tokenService.sign(json, process.env.SECRET)
                 res.status(200).json({message: "Usuário encontrado com sucesso", token: token})
-            } 
-            throw new Exception("Credenciais inválidas");
+            } else {
+                throw new Exception("Credenciais inválidas");
+            }
         } catch(err) {
             res.status(401).json({message: err.message})
         }
