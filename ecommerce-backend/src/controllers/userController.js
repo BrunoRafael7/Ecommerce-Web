@@ -47,9 +47,8 @@ const controller = {
     },
     login: async (req, res) => {
         try {
-            const hash = await passwordService.hash(req.body.password, Number(process.env.SALT_ROUNDS))
             const user = await userModel.findOne({email: req.body.email})
-            const isMatch = await bcrypt.compare(user.password, hash)
+            const isMatch = await bcrypt.compare(req.body.password, user.password)
             if (isMatch) {
                 const {__v, _id, ...json} = user.toObject()
                 const token = await tokenService.sign(json, process.env.SECRET)
